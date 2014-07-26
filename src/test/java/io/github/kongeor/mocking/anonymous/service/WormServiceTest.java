@@ -17,7 +17,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(fullyQualifiedNames="io.github.kongeor.mocking.anonymous.service.WormService$1")
+@PrepareForTest(fullyQualifiedNames="io.github.kongeor.mocking.anonymous.service.*")
 public class WormServiceTest {
 
 	private List<Worm> worms;
