@@ -2,8 +2,6 @@ package io.github.kongeor.mocking.anonymous.service;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.powermock.api.mockito.PowerMockito.when;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
-import io.github.kongeor.mocking.anonymous.filter.HeroWormFilter;
 import io.github.kongeor.mocking.anonymous.model.Worm;
 
 import java.util.ArrayList;
@@ -13,17 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(fullyQualifiedNames="io.github.kongeor.mocking.anonymous.service.*")
+@RunWith(MockitoJUnitRunner.class)
 public class WormServiceTest {
 
 	private List<Worm> worms;
 	private @Mock Worm worm;
 	private @Mock RemoteService remoteService;
-	private @Mock HeroWormFilter heroWormFilter;
+	private @Mock HeroWormPredicate wormHeroFilter;
 	
 	private WormService wormService;
 
@@ -32,15 +28,12 @@ public class WormServiceTest {
 		worms = new ArrayList<>();
 		worms.add(worm);
 		
-		whenNew(HeroWormFilter.class).withArguments(worm, remoteService)
-				.thenReturn(heroWormFilter);
-
-		wormService = new WormService(worms, remoteService);
+		wormService = new WormService(worms, wormHeroFilter);
 	}
 	
 	@Test
 	public void testGetHeroes() {
-		when(heroWormFilter.isHero()).thenReturn(true);
+		when(wormHeroFilter.test(worm)).thenReturn(true);
 		assertThat(wormService.getHeroes()).containsExactly(worm);
 	}
 
