@@ -38,7 +38,7 @@ public class HeroWormFilterTest {
 	}
 	
 	@Test
-	public void is_not_hero_is_service_and_worm_say_no() {
+	public void is_not_hero_if_service_and_worm_say_no() {
 		assertThat(filter.isHero()).isFalse();
 	}
 

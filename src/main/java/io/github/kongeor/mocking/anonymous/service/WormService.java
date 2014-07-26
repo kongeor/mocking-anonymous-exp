@@ -9,16 +9,18 @@ import java.util.List;
 
 public class WormService {
 
-	private List<Worm> worms;
+	private final List<Worm> worms;
+	private final RemoteService remoteService;
 
-	public WormService(List<Worm> worms) {
+	public WormService(List<Worm> worms, RemoteService remoteService) {
 		this.worms = worms;
+		this.remoteService = remoteService;
 	}
 	
 	public List<Worm> getHeroes() {
 		return ListUtil.filter(worms, new Predicate<Worm>() {
 			public boolean test(Worm worm) {
-				return new HeroWormFilter(worm, new RemoteService()).isHero();
+				return new HeroWormFilter(worm, remoteService).isHero();
 			};
 		});
 	}
