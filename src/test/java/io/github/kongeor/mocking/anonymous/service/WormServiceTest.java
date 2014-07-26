@@ -13,11 +13,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareEverythingForTest;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareEverythingForTest
+@PrepareForTest(fullyQualifiedNames="io.github.kongeor.mocking.anonymous.service.WormService$1")
 public class WormServiceTest {
 
 	private List<Worm> worms;
